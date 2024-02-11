@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="font-serif bg-[#62acb4]">
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 flex items-center justify-between flex-wrap bg-[#f3f4f6] p-6">
+        <div class="flex items-center flex-shrink-0 text-[#f9ac34] mr-6">
+            <img src="./img/logo.png" alt="logo" class="h-20 w-30 mr-2">
+        </div>
+        <div class="block lg:hidden">
+            <button id="menu-button"
+                class="flex items-center px-3 py-2 border rounded text-black border-[#f9ac34] hover:text-[#f9ac34] hover:border-[#f9ac34]">
+                <svg id="menu-icon" class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <title>Menu</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v15z" />
+                </svg>
+            </button>
+        </div>
+        <div id="menu" class="w-full block flex-grow lg:flex lg:items-center lg:w-auto hidden lg:justify-end space-x-4">
+            <div class="text-sm lg:flex-grow lg:flex lg:justify-end space-x-8">
+                <a href="./index.html" class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-[#62acb4] ml-8">
+                    HOME
+                </a>
+                <a href="./about.html" class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-[#62acb4] mr-4">
+                    ABOUT
+                </a>
+                <a href="./products.html"
+                    class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-[#62acb4] mr-4">
+                    PRODUCTS
+                </a>
+                <a href="./blogs.html" class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-[#62acb4] mr-4">
+                    BLOGS
+                </a>
+                <a href="#contact" class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-[#62acb4] mr-4">
+                    CONTACT
+                </a>
+                <a href="./locations.html"
+                    class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-[#62acb4] mr-4">
+                    LOCATIONS
+                </a>
+            </div>
+            <!-- <div>
+                <a href="./cart.html" class="block mt-4 lg:inline-block lg:mt-0 text-black hover:bg-[#f9ac34] ml-4 w-8">
+                    <img src="./img/cart.png">
+                </a>
+            </div> -->
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <!-- Contact Section -->
+            <section class="flex flex-wrap p-8 m-8">
+                <!-- Map -->
+                <div class="w-full md:w-1/2 pt-12 container mx-auto bg-[#f3f4f6] w-full rounded-md shadow-md p-8 m-8 relative">
+                    <!-- Google Maps iframe -->
+                    <iframe src="https://maps.google.com/maps?q=your_address_here&output=embed" width="100%"
+                        height="500" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="w-full md:w-1/2 p-4 flex justify-center">
+                    <div class="w-full max-w-lg">
+                        <h1 class="text-center text-3xl md:text-4xl p-4 align-center">CONTACT US</h1>
+                        <div class="w-16 border-b-2 border-black mx-auto"></div>
+                        <form class="w-full max-w-lg">
+                            <div class="flex flex-wrap -mx-3 mb-6 pt-8">
+                                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                        for="grid-first-name">
+                                        First Name
+                                    </label>
+                                    <input
+                                        class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                        id="grid-first-name" type="text" placeholder="Jane">
+                                </div>
+                                <div class="w-full md:w-1/2 px-3">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                        for="grid-last-name">
+                                        Last Name
+                                    </label>
+                                    <input
+                                        class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                                        id="grid-last-name" type="text" placeholder="Doe">
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap -mx-3 mb-6">
+                                <div class="w-full  px-3 mb-6 md:mb-0">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                        for="grid-email">
+                                        Email
+                                    </label>
+                                    <input
+                                        class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                        id="grid-email" type="text" placeholder="abc@example.com">
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap -mx-3 mb-6">
+                                <div class="w-full px-3">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                        for="grid-message">
+                                        Message
+                                    </label>
+                                    <textarea
+                                        class=" no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"
+                                        id="grid-message"></textarea>
+                                </div>
+                            </div>
+                            <div class="md:flex md:items-center">
+                                <div class="md:w-1/3">
+                                    <button
+                                        class="shadow bg-[#f3f4f6] hover:bg-gray-200 focus:shadow-outline focus:outline-none text-black py-2 px-4 rounded"
+                                        type="submit">
+                                        Send
+                                    </button>
+                                </div>
+                                <div class="md:w-2/3"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- footer -->
+            <footer class="bg-beige text-black p-6 text-center bg-[#f3f4f6]">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div>
+                        <h2 class="font-bold mb-2">CONTACT US</h2>
+                        <p><i class="fas fa-phone"></i> 91-9137701291</p>
+                        <p><i class="fas fa-envelope"></i> panchalswaraj13@gmail.com</p>
+                    </div>
+                    <div>
+                        <h2 class="font-bold mb-2">INFORMATION</h2>
+                        <ul>
+                            <a href="./about.html">
+                                <li>About Us</li>
+                            </a>
+                            <a href="./products.html">
+                                <li>Our Products</li>
+                            </a>
+                            <a href="./blogs.html">
+                                <li>Blogs</li>
+                            </a>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2 class="font-bold mb-2">SOCIAL MEDIA</h2>
+                        <a href="">
+                            <p><i class="fab fa-instagram"></i> Instagram</p>
+                        </a>
+                    </div>
+                    <div>
+                        <h2 class="font-bold mb-2">CUSTOMER SERVICE</h2>
+                        <ul>
+                            <a href="./contact.html">
+                                <li>Contact Us</li>
+                            </a>
+                            <a href="./locations.html">
+                                <li>Locations</li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <p>Powered By Swaraj Panchal © 2024</p>
+                </div>
+            </footer>
+        </article>
+    </main>
+    <script src="./script.js"></script>
+</body>
+
+</html>

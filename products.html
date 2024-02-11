@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="font-serif h-[100vh] bg-[#62acb4]">
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 flex items-center justify-between flex-wrap bg-[#f3f4f6] p-6">
+        <div class="flex items-center flex-shrink-0 text-[#62acb4] mr-6">
+            <img src="./img/logo.png" alt="logo" class="h-20 w-30 mr-2">
+        </div>
+        <div class="block lg:hidden">
+            <button id="menu-button"
+                class="flex items-center px-3 py-2 border rounded text-black border-white hover:text-[#62acb4] hover:border-white">
+                <svg id="menu-icon" class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <title>Menu</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v15z" />
+                </svg>
+            </button>
+        </div>
+        <div id="menu" class="w-full block flex-grow lg:flex lg:items-center lg:w-auto hidden lg:justify-end space-x-4">
+            <div class="text-sm lg:flex-grow lg:flex lg:justify-end space-x-8">
+                <a href="./index.html"
+                    class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-[#62acb4] ml-8">
+                    HOME
+                </a>
+                <a href="./about.html"
+                    class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-[#62acb4] mr-4">
+                    ABOUT
+                </a>
+                <a href="#products"
+                    class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-[#62acb4] mr-4">
+                    PRODUCTS
+                </a>
+                <a href="./blogs.html"
+                    class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-[#62acb4] mr-4">
+                    BLOGS
+                </a>
+                <a href="./contact.html"
+                    class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-[#62acb4] mr-4">
+                    CONTACT
+                </a>
+                <a href="./locations.html" class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-[#62acb4] mr-4">
+                    LOCATIONS
+                </a>
+            </div>
+            <!-- <div>
+                <a href="./cart.html" class="block mt-4 lg:inline-block lg:mt-0 text-black hover:bg-[#62acb4] ml-4 w-8">
+                    <img src="./img/cart.png">
+                </a>
+            </div> -->
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <!-- Products Section -->
+            <section x-data="{ showCategories: false, showNewContent: true }">
+                <div class="flex justify-between items-center">
+                    <div></div>
+                    <h1 class="text-center text-4xl md:text-5xl p-4 pt-12 align-center sm:pl-[4em]">
+                        <span x-text="showCategories ? 'CATEGORIES' : 'OUR PRODUCTS'"></span>
+                    </h1>
+                    <button @click="showCategories = !showCategories, showNewContent = !showNewContent"
+                        class="bg-[#f3f4f6] text-black rounded m-4 px-2 py-1 transform hover:scale-105 transition-transform duration-200 ease-in-out shadow-md">
+                        <span x-text="showCategories ? 'View All Products' : 'View Categories'"></span>
+                    </button>
+                </div>
+                <div class="w-16 border-b-2 border-black mx-auto my-2"></div>
+                <div x-show="showNewContent" x-transition:enter="transition ease-out duration-500"
+                    x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-500" x-transition:leave-start="transform opacity-100 scale-100"
+                    x-transition:leave-end="transform opacity-0 scale-95">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-8 m-8">
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <img src="./img/homebg3.jpg" alt="Petticoat">
+                            <p>Ladies Wear</p>
+                            <span class="text-sm text-gray-500">$20</span>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <img src="./img/homebg3.jpg" alt="Petticoat">
+                            <p>Girls Jacket</p>
+                            <span class="text-sm text-gray-500">$20</span>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <img src="./img/homebg3.jpg" alt="Petticoat">
+                            <p>Designer Blouse</p>
+                            <span class="text-sm text-gray-500">$20</span>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <img src="./img/homebg3.jpg" alt="Petticoat">
+                            <p>Ladies Panty</p>
+                            <span class="text-sm text-gray-500">$20</span>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <img src="./img/homebg3.jpg" alt="Petticoat">
+                            <p>Ladies Salwar Suit</p>
+                            <span class="text-sm text-gray-500">$20</span>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <img src="./img/homebg3.jpg" alt="Petticoat">
+                            <p>Ladies Shirt</p>
+                            <span class="text-sm text-gray-500">$20</span>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <img src="./img/homebg3.jpg" alt="Petticoat">
+                            <p>Petticoat</p>
+                            <span class="text-sm text-gray-500">$20</span>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <img src="./img/homebg3.jpg" alt="Petticoat">
+                            <p>Jacket</p>
+                            <span class="text-sm text-gray-500">$20</span>
+                        </div>
+                    </div>
+                </div>
+            
+                <div x-show="showCategories" x-transition:enter="transition ease-out duration-500"
+                    x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-500" x-transition:leave-start="transform opacity-100 scale-100"
+                    x-transition:leave-end="transform opacity-0 scale-95">
+                    <div x-data="{ tab: 'tab-1', showMore: false }"
+                        x-transition:enter="transition ease-out duration-100"
+                        x-transition:enter-start="transform opacity-0 scale-95"
+                        x-transition:enter-end="transform opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-75"
+                        x-transition:leave-start="transform opacity-100 scale-100"
+                        x-transition:leave-end="transform opacity-0 scale-95"
+                        class="md:flex-row space-y-2 md:space-y-0 md:space-x-8 space-y-4 p-4">
+                        <ul class="flex justify-center space-x-4 items-center">
+                            <li :class="{ 'border-b-2 border-blue-500': tab === 'tab-1' }" class="cursor-pointer" @click="tab = 'tab-1'">Dry
+                                Fruits</li>
+                            <li :class="{ 'border-b-2 border-blue-500': tab === 'tab-2' }" class="cursor-pointer" @click="tab = 'tab-2'">Spices
+                            </li>
+                            <li :class="{ 'border-b-2 border-blue-500': tab === 'tab-3' }" class="cursor-pointer" @click="tab = 'tab-3'">
+                                Chocolates</li>
+                            <li :class="{ 'border-b-2 border-blue-500': tab === 'tab-4' }" class="cursor-pointer" @click="tab = 'tab-4'">Sweets
+                            </li>
+                            <li class="cursor-pointer" @click="showMore = !showMore">
+                                <span x-text="showMore ? 'Less' : 'More'"></span>
+                            </li>
+                        </ul>
+                        <ul x-show="showMore" class="flex flex-wrap justify-center space-x-8 items-center sm:p-2">
+                            <li :class="{ 'border-b-2 border-blue-500': tab === 'tab-5' }" class="cursor-pointer" @click="tab = 'tab-5'">Honey
+                            </li>
+                            <li :class="{ 'border-b-2 border-blue-500': tab === 'tab-6' }" class="cursor-pointer" @click="tab = 'tab-6'">Bakery
+                            </li>
+                            <li :class="{ 'border-b-2 border-blue-500': tab === 'tab-7' }" class="cursor-pointer" @click="tab = 'tab-7'">Gift
+                                Packs</li>
+                            <li :class="{ 'border-b-2 border-blue-500': tab === 'tab-8' }" class="cursor-pointer" @click="tab = 'tab-8'">Cold
+                                Drinks</li>
+                        </ul>
+                        <ul x-show="showMore" class="flex flex-wrap justify-center space-x-8 items-center sm:p-2">
+                            <li :class="{ 'border-b-2 border-blue-500': tab === 'tab-9' }" class="cursor-pointer" @click="tab = 'tab-9'">Cold
+                                Drinks</li>
+                            <li :class="{ 'border-b-2 border-blue-500': tab === 'tab-10' }" class="cursor-pointer" @click="tab = 'tab-10'">Cold
+                                Drinks</li>
+                            <li :class="{ 'border-b-2 border-blue-500': tab === 'tab-11' }" class="cursor-pointer" @click="tab = 'tab-11'">Cold
+                                Drinks</li>
+                            <li :class="{ 'border-b-2 border-blue-500': tab === 'tab-12' }" class="cursor-pointer" @click="tab = 'tab-12'">Cold
+                                Drinks</li>
+                        </ul>
+                        <ul x-show="showMore" class="flex flex-wrap justify-center space-x-8 items-center sm:p-2">
+                            <li :class="{ 'border-b-2 border-blue-500': tab === 'tab-13' }" class="cursor-pointer" @click="tab = 'tab-13'">Cold
+                                Drinks</li>
+                            <li :class="{ 'border-b-2 border-blue-500': tab === 'tab-14' }" class="cursor-pointer" @click="tab = 'tab-14'">Cold
+                                Drinks</li>
+                            <li :class="{ 'border-b-2 border-blue-500': tab === 'tab-15' }" class="cursor-pointer" @click="tab = 'tab-15'">Cold
+                                Drinks</li>
+                        </ul>
+                        <div x-show="tab === 'tab-1'" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-8">
+                            <div class="bg-gray-100 p-4 rounded-lg">
+                                <img src="./img/homebg3.jpg" alt="Petticoat">
+                                <p>Ladies Wear</p>
+                                <span class="text-sm text-gray-500">$20</span>
+                            </div>
+                            <div class="bg-gray-100 p-4 rounded-lg">
+                                <img src="./img/homebg3.jpg" alt="Petticoat">
+                                <p>Ladies Wear</p>
+                                <span class="text-sm text-gray-500">$20</span>
+                            </div>
+                        </div>
+                        <div x-show="tab === 'tab-2'" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-8">
+                            <div class="bg-gray-100 p-4 rounded-lg">
+                                <img src="./img/homebg2.jpg" alt="Petticoat">
+                                <p>Ladies Wear</p>
+                                <span class="text-sm text-gray-500">$20</span>
+                            </div>
+                        </div>
+                        <div x-show="tab === 'tab-3'" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-8">
+                            <div class="bg-gray-100 p-4 rounded-lg">
+                                <img src="./img/homebg3.jpg" alt="Petticoat">
+                                <p>Ladies Wear</p>
+                                <span class="text-sm text-gray-500">$20</span>
+                            </div>
+                        </div>
+                        <div x-show="tab === 'tab-4'" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-8">
+                            <div class="bg-gray-100 p-4 rounded-lg">
+                                <img src="./img/homebg1.jpg" alt="Petticoat">
+                                <p>Ladies Wear</p>
+                                <span class="text-sm text-gray-500">$20</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </main>
+    <script src="./script.js"></script>
+</body>
+
+</html>

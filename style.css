@@ -1,0 +1,25 @@
+/* 
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+.animate-fadeIn {
+    animation: fadeIn 2s;
+} */
+
+/* @keyframes slideIn {
+    0% {transform: translateY(-100%);}
+    100% {transform: translateY(0);}
+}
+.animate-slideIn {
+    animation: slideIn 1s;
+} */
+
+/* @keyframes rotate {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+.animate-rotate {
+    animation: rotate 2s linear infinite;
+}
+animate-rotate */
