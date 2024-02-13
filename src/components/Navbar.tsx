@@ -10,7 +10,7 @@ function Navbar() {
 
 	return (
 		<div className="grid items-center w-full h-16 px-4 border-b font-poppins md:px-6">
-			<nav className="flex items-center w-full space-x-4 text-sm">
+			<nav className="sticky top-0 flex items-center w-full space-x-4 text-sm">
 				<Link to="/">
 					<img src={Logo} alt="logo" className="object-contain w-24" />
 				</Link>
