@@ -6,9 +6,9 @@ function ProductPage() {
 			<div className="flex flex-col space-y-6 lg:w-1/2">
 				<div className="flex items-center justify-center">
 					<img
-						src="https://cdn.dribbble.com/userupload/2844479/file/original-4bcc2720bd625703a9b5b42824e6dc32.png?resize=1024x768"
+						src="https://m.media-amazon.com/images/I/7128GOUxSCL._AC_SX425_.jpg"
 						alt="Icha Chair"
-						className="object-cover w-full h-auto"
+						className="object-contain w-full h-auto"
 						width="400"
 						height="400"
 						style={{ aspectRatio: "400 / 400" }}
@@ -25,18 +25,34 @@ function ProductPage() {
 				</div>
 			</div>
 
-			<div className="flex flex-col space-y-4 lg:w-1/2">
-				<h1 className="text-4xl font-bold">ICHA CHAIR</h1>
+			<div className="flex flex-col space-y-4 lg:w-1/2 font-poppins">
+				<h1 className="text-xl font-semibold">
+					iBUYPOWER SlateMR Gaming PC Computer Desktop SlateMR 2150V2
+					(Intel Core i5 12400F 2.5 GHz, GeForce GTX 1650 4GB, 8 GB DDR4
+					RAM, 500 GB NVMe SSD, WiFi Ready, Windows 11 Home),Black
+				</h1>
 				<div className="flex items-center justify-between">
-					<p className="text-lg font-semibold">FROM ₹5450</p>
+					<p className="text-2xl font-bold">FROM ₹60000</p>
 					<p className="text-sm">IN STOCK - SHIPS WITHIN 6 WEEKS</p>
 				</div>
 
 				<p className="text-gray-600">
-					Japanese and Scandinavian design meet in daadsakdl sdl
-					Massproductions lada series, an elegant furniture family with a
-					light yet sturdy construction. Lorem ipsum dolor sit amet
-					consectetur abet adtum dolore abent u ustro.
+					Get started on your gaming PC journey with the iBUYPOWER SlateMR
+					2150V2. This prebuilt utilizes expertly vetted components to
+					create the perfect entry-level gaming desktop computer that
+					supports your favorite videogames. The Intel Core i5 12400F
+					processor and Nvidia GeForce GTX 1650 4GB graphics card lets you
+					play games at a better frame rate and gives you the opportunity
+					to start streaming and creating content. With 8GB of DDR4 memory,
+					you’ll be able to run multiple processes and browser tabs at
+					once. Optimize your desktop experience with iBUYPOWER. - RGB
+					gaming keyboard and mouse included - Intel Core i5-12400F 2.50
+					GHz (up to 4.40 GHz Max Turbo) 6-core 12-thread processor -
+					Nvidia GeForce GTX 1650 4GB graphics card - 500GB NVMe
+					solid-state drive - 8 GB of DDR4 3000 MHz Ram - 600W 80+ gold
+					power supply unit - 802.11AC Onboard Wi-Fi - Fan cooler - Comes
+					with Windows 11 Home installed so you can quickly connect with
+					your community through a smooth, modern interface
 				</p>
 
 				<div className="flex flex-col space-y-6">
@@ -51,12 +67,12 @@ function ProductPage() {
 
 					<div className="flex items-center justify-between">
 						<h2 className="font-semibold">FINISH</h2>
-						<p>RED LACQUERED BEECH</p>
+						<p>Metal Finishing</p>
 					</div>
 
 					<div className="flex items-center justify-between">
 						<h2 className="font-semibold">FABRIC SUPPLIER</h2>
-						<p>CAMIRA</p>
+						<p>Dellas</p>
 					</div>
 				</div>
 
