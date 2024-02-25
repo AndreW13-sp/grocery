@@ -1,12 +1,12 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink } from "react-router-dom";
 
-import Logo from '../assets/img/logo.png';
+import Logo from "../assets/img/logo.png";
 
 function Navbar() {
 	const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
 		isActive
-			? 'text-blue-700 dark:text-blue-500'
-			: 'text-gray-500 dark:text-gray-400';
+			? "text-blue-700 dark:text-blue-500"
+			: "text-gray-500 dark:text-gray-400";
 
 	return (
 		<div className="grid items-center w-full h-16 px-4 border-b font-poppins md:px-6">
@@ -32,7 +32,7 @@ function Navbar() {
 					</button>
 				</div>
 
-				<div className="flex-grow hidden block w-full space-x-4 lg:flex lg:items-center lg:w-auto lg:justify-end">
+				<div className="flex-grow block w-full space-x-4 lg:flex lg:items-center lg:w-auto lg:justify-end">
 					<nav className="space-x-8 lg:flex-grow lg:flex lg:justify-end">
 						<NavLink to="/" className={getNavLinkClass}>
 							Home
