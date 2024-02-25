@@ -1,21 +1,42 @@
-import {
-	ArrowLeftIcon,
-	ChevronDownIcon,
-	IndianRupeeIcon,
-	LinkIcon,
-} from "lucide-react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { ArrowLeftIcon, ChevronDownIcon, IndianRupeeIcon, LinkIcon } from "lucide-react";
 import { useMemo } from "react";
+import { useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
+import * as yup from "yup";
 
 import { products } from "../../constants/data";
 import AdminLayout from "../../layouts/AdminLayout";
 
+const validationSchema = yup
+	.object({
+		title: yup.string().required(),
+		imageUrl: yup.string().url("Please provide the valid image url").required(),
+		description: yup.string().required(),
+		price: yup.number().positive().min(10, "Minimun price is 10").required(),
+		color: yup.string().required(),
+		category: yup.string().required(),
+	})
+	.required();
+
 function EditProduct() {
 	const { productId } = useParams();
-	const product = useMemo(
-		() => products.find((p) => p.id === productId),
-		[productId]
-	);
+	const product = useMemo(() => products.find((p) => p.id === productId), [productId]);
+	const { register, handleSubmit } = useForm({
+		resolver: yupResolver(validationSchema),
+		defaultValues: {
+			title: product?.name || "",
+			imageUrl: product?.image || "",
+			description: product?.description || "",
+			price: product?.price || 10,
+			color: product?.color || "",
+			category: product?.category || "",
+		},
+	});
+
+	const onProductSave = (data) => {
+		console.log(data);
+	};
 
 	return (
 		<AdminLayout>
@@ -30,7 +51,7 @@ function EditProduct() {
 				</Link>
 			</div>
 
-			<div className="grid grid-cols-1 gap-4 sm:grid-cols-12 md:grid-cols-12">
+			<div className="grid items-start grid-cols-1 gap-4 sm:grid-cols-12 md:grid-cols-12">
 				<div className="relative col-span-1 p-3 overflow-hidden rounded-md bg-slate-200/10 md:col-span-5 group">
 					<img
 						src={product?.image}
@@ -60,46 +81,37 @@ function EditProduct() {
 										/>
 									</svg>
 									<p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-										<span className="font-semibold">
-											Click to upload
-										</span>{" "}
-										or drag and drop
+										<span className="font-semibold">Click to upload</span> or drag and
+										drop
 									</p>
 									<p className="text-xs text-gray-500 dark:text-gray-400">
 										SVG, PNG, JPG or GIF (MAX. 800x400px)
 									</p>
 								</div>
-								<input
-									id="dropzone-file"
-									type="file"
-									className="hidden"
-								/>
+								<input id="dropzone-file" type="file" className="hidden" />
 							</label>
 						</div>
 					</div>
 				</div>
 
 				<div className="col-span-1 p-6 rounded-md md:col-span-7 bg-slate-200/10">
-					<form className="font-poppins">
+					<form className="font-poppins" onSubmit={handleSubmit(onProductSave)}>
 						<div className="mb-5">
-							<label
-								htmlFor="email"
-								className="block mb-3 text-sm font-medium text-white"
-							>
+							<label htmlFor="title" className="block mb-3 text-sm font-medium text-white">
 								Title
 							</label>
 							<input
-								type="email"
-								id="email"
+								type="text"
+								id="title"
 								className="w-full px-5 py-3 text-sm font-normal text-white transition border-2 rounded-lg outline-none bg-gray-800/40 border-slate-400 active:border-blue-500 disabled:cursor-default disabled:bg-slate-300/15 focus:border-purple-400 placeholder:text-slate-500"
 								placeholder="name@flowbite.com"
-								required
+								{...register("title")}
 							/>
 						</div>
 
 						<div className="mb-5">
 							<label
-								htmlFor="email"
+								htmlFor="imageUrl"
 								className="block mb-3 text-sm font-medium text-white"
 							>
 								Image URL
@@ -110,32 +122,34 @@ function EditProduct() {
 								</span>
 								<input
 									type="url"
-									id="email"
+									id="imageUrl"
 									className="w-full p-3 text-sm text-white bg-transparent outline-none active:border-blue-500 disabled:cursor-default disabled:bg-slate-300/15 placeholder:text-slate-500"
 									placeholder="https://www.yoursite.com/path/to/image.png"
-									required
+									{...register("imageUrl")}
 								/>
 							</div>
 						</div>
 
 						<div className="mb-5">
 							<label
-								htmlFor="email"
+								htmlFor="description"
 								className="block mb-3 text-sm font-medium text-white"
 							>
 								Description
 							</label>
 							<textarea
+								id="description"
 								rows={5}
 								placeholder="Enter your prroduct description"
 								className="w-full px-5 py-3 text-sm font-normal text-white transition border-2 rounded-lg outline-none bg-gray-800/40 border-slate-400 active:border-blue-500 disabled:cursor-default disabled:bg-slate-300/15 focus:border-purple-400 placeholder:text-slate-500"
+								{...register("description")}
 							></textarea>
 						</div>
 
 						<div className="flex flex-col gap-3 mb-5 lg:flex-row">
 							<div className="w-full xl:w-1/3">
 								<label
-									htmlFor="email"
+									htmlFor="price"
 									className="block mb-3 text-sm font-medium text-white"
 								>
 									Price
@@ -145,59 +159,51 @@ function EditProduct() {
 										<IndianRupeeIcon size={20} color="currentColor" />
 									</span>
 									<input
-										type="email"
-										id="email"
-										className="w-full p-2.5 text-white bg-transparent outline-none active:border-blue-500 disabled:cursor-default disabled:bg-slate-300/15 placeholder:text-slate-500"
+										type="number"
+										id="price"
+										className="w-full p-2.5 text-white bg-transparent outline-none active:border-blue-500 disabled:cursor-default disabled:bg-slate-300/15 placeholder:text-slate-500 appearance-none"
 										placeholder="499"
-										required
+										{...register("price")}
 									/>
 								</div>
 							</div>
 
 							<div className="w-full lg:w-1/3">
 								<label
-									htmlFor="email"
+									htmlFor="color"
 									className="block mb-3 text-sm font-medium text-white"
 								>
 									Color
 								</label>
 								<input
-									type="email"
-									id="email"
+									id="color"
+									type="text"
 									className="w-full px-3 py-3 text-sm font-normal text-white transition border-2 rounded-lg outline-none bg-gray-800/40 border-slate-400 active:border-blue-500 disabled:cursor-default disabled:bg-slate-300/15 focus:border-purple-400 placeholder:text-slate-500"
 									placeholder="name@flowbite.com"
-									required
+									{...register("color")}
 								/>
 							</div>
 
 							<div className="w-full lg:w-1/3">
 								<label
-									htmlFor="email"
+									htmlFor="category"
 									className="block mb-3 text-sm font-medium text-white"
 								>
 									Category
 								</label>
 								<div className="inline-flex items-center w-full transition border-2 rounded-lg border-slate-400 bg-gray-800/40 focus-within:border-purple-400">
 									<select
-										name=""
+										id="category"
 										className="w-full p-3 text-sm font-normal text-white bg-transparent outline-none appearance-none active:border-purple-400 disabled:cursor-default disabled:bg-slate-300/15 placeholder:text-slate-500"
+										{...register("category")}
 									>
-										<option
-											value="1"
-											className="text-white bg-slate-600"
-										>
+										<option value="1" className="text-white bg-slate-600">
 											One
 										</option>
-										<option
-											value="2"
-											className="text-white bg-slate-600"
-										>
+										<option value="2" className="text-white bg-slate-600">
 											Two
 										</option>
-										<option
-											value="3"
-											className="text-white bg-slate-600"
-										>
+										<option value="3" className="text-white bg-slate-600">
 											Three
 										</option>
 									</select>
