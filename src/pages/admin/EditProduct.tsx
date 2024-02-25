@@ -1,10 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ArrowLeftIcon, ChevronDownIcon, IndianRupeeIcon, LinkIcon } from "lucide-react";
+import { ArrowLeftIcon, IndianRupeeIcon, LinkIcon } from "lucide-react";
 import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 import * as yup from "yup";
 
+import Input, { IconInput, SelectInput } from "../../components/form/Input";
 import { products } from "../../constants/data";
 import AdminLayout from "../../layouts/AdminLayout";
 
@@ -22,17 +23,24 @@ const validationSchema = yup
 function EditProduct() {
 	const { productId } = useParams();
 	const product = useMemo(() => products.find((p) => p.id === productId), [productId]);
-	const { register, handleSubmit } = useForm({
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors },
+	} = useForm({
 		resolver: yupResolver(validationSchema),
 		defaultValues: {
 			title: product?.name || "",
 			imageUrl: product?.image || "",
-			description: product?.description || "",
+			description: "",
 			price: product?.price || 10,
 			color: product?.color || "",
 			category: product?.category || "",
 		},
 	});
+
+	const imageUrl = watch("imageUrl");
 
 	const onProductSave = (data) => {
 		console.log(data);
@@ -40,7 +48,7 @@ function EditProduct() {
 
 	return (
 		<AdminLayout>
-			<div className="flex flex-col gap-3 mb-6 sm:flex-row sm:items-center sm:justify-between font-poppins">
+			<div className="flex items-center justify-between gap-3 mb-6 sm:flex-row font-poppins">
 				<h2 className="text-2xl font-medium text-white">Edit Product</h2>
 				<Link
 					to=".."
@@ -54,7 +62,7 @@ function EditProduct() {
 			<div className="grid items-start grid-cols-1 gap-4 sm:grid-cols-12 md:grid-cols-12">
 				<div className="relative col-span-1 p-3 overflow-hidden rounded-md bg-slate-200/10 md:col-span-5 group">
 					<img
-						src={product?.image}
+						src={imageUrl || product?.image}
 						alt={product?.name}
 						className="object-contain w-full h-full max-h-[450px] rounded-md"
 					/>
@@ -96,123 +104,64 @@ function EditProduct() {
 
 				<div className="col-span-1 p-6 rounded-md md:col-span-7 bg-slate-200/10">
 					<form className="font-poppins" onSubmit={handleSubmit(onProductSave)}>
-						<div className="mb-5">
-							<label htmlFor="title" className="block mb-3 text-sm font-medium text-white">
-								Title
-							</label>
-							<input
-								type="text"
-								id="title"
-								className="w-full px-5 py-3 text-sm font-normal text-white transition border-2 rounded-lg outline-none bg-gray-800/40 border-slate-400 active:border-blue-500 disabled:cursor-default disabled:bg-slate-300/15 focus:border-purple-400 placeholder:text-slate-500"
-								placeholder="name@flowbite.com"
-								{...register("title")}
-							/>
-						</div>
+						<Input
+							id="title"
+							label="Title"
+							placeholder="Product title"
+							error={errors.title}
+							wire={register("title")}
+							className="mb-5"
+						/>
 
-						<div className="mb-5">
-							<label
-								htmlFor="imageUrl"
-								className="block mb-3 text-sm font-medium text-white"
-							>
-								Image URL
-							</label>
-							<div className="inline-flex w-full transition border-2 rounded-lg border-slate-400 focus-within:text-purple-400 focus-within:border-purple-400 bg-gray-800/40">
-								<span className="inline-flex items-center px-3 bg-slate-300/10">
-									<LinkIcon size={20} color="currentColor" />
-								</span>
-								<input
-									type="url"
-									id="imageUrl"
-									className="w-full p-3 text-sm text-white bg-transparent outline-none active:border-blue-500 disabled:cursor-default disabled:bg-slate-300/15 placeholder:text-slate-500"
-									placeholder="https://www.yoursite.com/path/to/image.png"
-									{...register("imageUrl")}
-								/>
-							</div>
-						</div>
+						<IconInput
+							id="imageUrl"
+							label="Image URL"
+							placeholder="Product title"
+							icon={<LinkIcon size={20} color="currentColor" />}
+							error={errors.imageUrl}
+							wire={register("imageUrl")}
+							className="mb-5"
+						/>
 
-						<div className="mb-5">
-							<label
-								htmlFor="description"
-								className="block mb-3 text-sm font-medium text-white"
-							>
-								Description
-							</label>
-							<textarea
-								id="description"
-								rows={5}
-								placeholder="Enter your prroduct description"
-								className="w-full px-5 py-3 text-sm font-normal text-white transition border-2 rounded-lg outline-none bg-gray-800/40 border-slate-400 active:border-blue-500 disabled:cursor-default disabled:bg-slate-300/15 focus:border-purple-400 placeholder:text-slate-500"
-								{...register("description")}
-							></textarea>
-						</div>
+						<Input
+							id="description"
+							label="Description"
+							placeholder="Product description"
+							error={errors.description}
+							wire={register("description")}
+							className="mb-5"
+						/>
 
 						<div className="flex flex-col gap-3 mb-5 lg:flex-row">
-							<div className="w-full xl:w-1/3">
-								<label
-									htmlFor="price"
-									className="block mb-3 text-sm font-medium text-white"
-								>
-									Price
-								</label>
-								<div className="inline-flex w-full transition border-2 rounded-lg border-slate-400 focus-within:text-purple-400 focus-within:border-purple-400 bg-gray-800/40">
-									<span className="inline-flex items-center px-3 bg-slate-300/10">
-										<IndianRupeeIcon size={20} color="currentColor" />
-									</span>
-									<input
-										type="number"
-										id="price"
-										className="w-full p-2.5 text-white bg-transparent outline-none active:border-blue-500 disabled:cursor-default disabled:bg-slate-300/15 placeholder:text-slate-500 appearance-none"
-										placeholder="499"
-										{...register("price")}
-									/>
-								</div>
-							</div>
+							<IconInput
+								id="price"
+								label="Price"
+								placeholder="Price"
+								error={errors.price}
+								wire={register("price")}
+								icon={<IndianRupeeIcon size={20} color="currentColor" />}
+								className="lg:w-1/3"
+								mobileErrorOnly
+							/>
 
-							<div className="w-full lg:w-1/3">
-								<label
-									htmlFor="color"
-									className="block mb-3 text-sm font-medium text-white"
-								>
-									Color
-								</label>
-								<input
-									id="color"
-									type="text"
-									className="w-full px-3 py-3 text-sm font-normal text-white transition border-2 rounded-lg outline-none bg-gray-800/40 border-slate-400 active:border-blue-500 disabled:cursor-default disabled:bg-slate-300/15 focus:border-purple-400 placeholder:text-slate-500"
-									placeholder="name@flowbite.com"
-									{...register("color")}
-								/>
-							</div>
+							<Input
+								id="color"
+								label="Color"
+								placeholder="Color"
+								error={errors.color}
+								wire={register("color")}
+								className="lg:w-1/3"
+								mobileErrorOnly
+							/>
 
-							<div className="w-full lg:w-1/3">
-								<label
-									htmlFor="category"
-									className="block mb-3 text-sm font-medium text-white"
-								>
-									Category
-								</label>
-								<div className="inline-flex items-center w-full transition border-2 rounded-lg border-slate-400 bg-gray-800/40 focus-within:border-purple-400">
-									<select
-										id="category"
-										className="w-full p-3 text-sm font-normal text-white bg-transparent outline-none appearance-none active:border-purple-400 disabled:cursor-default disabled:bg-slate-300/15 placeholder:text-slate-500"
-										{...register("category")}
-									>
-										<option value="1" className="text-white bg-slate-600">
-											One
-										</option>
-										<option value="2" className="text-white bg-slate-600">
-											Two
-										</option>
-										<option value="3" className="text-white bg-slate-600">
-											Three
-										</option>
-									</select>
-
-									<span className="mr-2">
-										<ChevronDownIcon size={20} />
-									</span>
-								</div>
-							</div>
+							<SelectInput
+								id="category"
+								label="Category"
+								wire={register("category")}
+								placeholder="Select Category"
+								options={[{ value: "one", label: "One" }]}
+								className="lg:w-1/3"
+							/>
 						</div>
 
 						<button
