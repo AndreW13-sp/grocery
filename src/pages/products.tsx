@@ -1,7 +1,9 @@
 import ProductCard from "../components/Product";
-import { products } from "../constants/data";
+import useStore from "../store/product";
 
 function Products() {
+	const products = useStore((state) => state.products);
+
 	return (
 		<div className="grid items-start max-w-6xl gap-6 px-4 mx-auto my-5 lg:gap-12">
 			<div className="flex items-start">

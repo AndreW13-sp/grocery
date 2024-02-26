@@ -1,6 +1,8 @@
 import { ChevronDownIcon } from "lucide-react";
 import type { FieldError, FieldValues, UseFormRegister } from "react-hook-form";
 
+import { cn } from "../../utils";
+
 interface InputProps {
 	id: string;
 	label: string;
@@ -9,6 +11,7 @@ interface InputProps {
 	error?: FieldError;
 	wire: ReturnType<UseFormRegister<FieldValues>>;
 	className?: string;
+	labelStyles?: string;
 	mobileErrorOnly?: boolean;
 }
 
@@ -20,6 +23,7 @@ function Input({
 	placeholder,
 	type = "text",
 	className = "",
+	labelStyles = "",
 	mobileErrorOnly = false,
 }: InputProps) {
 	return (
@@ -27,7 +31,11 @@ function Input({
 			<div className="inline-flex flex-col gap-1 mb-3 md:flex-row md:items-center md:gap-2">
 				<label
 					htmlFor={id}
-					className={`block text-sm font-medium ${error ? "text-rose-500" : "text-white"}`}
+					className={cn(
+						"block text-sm font-medium",
+						error ? "text-rose-500" : "text-white",
+						labelStyles
+					)}
 				>
 					{label}
 				</label>

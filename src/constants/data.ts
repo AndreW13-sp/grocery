@@ -45,3 +45,5 @@ export const products = [
 		category: "Gaming Accessories",
 	},
 ];
+
+export type TProduct = (typeof products)[number];

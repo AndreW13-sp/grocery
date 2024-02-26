@@ -24,7 +24,7 @@ function Modal({
 				isOpen ? "" : "hidden"
 			}`}
 		>
-			<div className="w-full max-w-2xl max-h-full p-4">
+			<div className="max-w-2xl max-h-full p-4">
 				<div ref={modalRef} className="bg-gray-700 rounded-lg shadow">
 					{children}
 				</div>

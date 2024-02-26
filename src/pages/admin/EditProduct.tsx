@@ -2,7 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { ArrowLeftIcon, IndianRupeeIcon, LinkIcon } from "lucide-react";
 import { useMemo } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import * as yup from "yup";
 
 import Input, { IconInput, SelectInput } from "../../components/form/Input";
@@ -14,7 +14,7 @@ const validationSchema = yup
 		title: yup.string().required(),
 		imageUrl: yup.string().url("Please provide the valid image url").required(),
 		description: yup.string().required(),
-		price: yup.number().positive().min(10, "Minimun price is 10").required(),
+		price: yup.number().positive().min(10, "Minimun price must be 10").required(),
 		color: yup.string().required(),
 		category: yup.string().required(),
 	})
@@ -22,6 +22,7 @@ const validationSchema = yup
 
 function EditProduct() {
 	const { productId } = useParams();
+	const navigate = useNavigate();
 	const product = useMemo(() => products.find((p) => p.id === productId), [productId]);
 	const {
 		register,
@@ -51,8 +52,12 @@ function EditProduct() {
 			<div className="flex items-center justify-between gap-3 mb-6 sm:flex-row font-poppins">
 				<h2 className="text-2xl font-medium text-white">Edit Product</h2>
 				<Link
-					to=".."
+					to="#"
 					className="inline-flex items-center gap-1 px-3 py-2 transition rounded bg-slate-400/15 hover:bg-slate-400/10 hover:text-white"
+					onClick={(e) => {
+						e.preventDefault();
+						navigate(-1);
+					}}
 				>
 					<ArrowLeftIcon size={16} />
 					<span className="text-sm">Go Back</span>

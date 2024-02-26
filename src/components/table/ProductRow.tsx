@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function ProductRow({ product, isSelected, onSelectionChange, onEditClick }) {
+function ProductRow({ product, isSelected, onSelectionChange, onDeleteClick }) {
 	return (
 		<tr className="border-b odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 dark:border-gray-700">
 			<td className="w-4 p-4">
@@ -39,11 +39,13 @@ function ProductRow({ product, isSelected, onSelectionChange, onEditClick }) {
 					<Link
 						to={`/admin/edit-product/${product.id}`}
 						className="px-3 py-1.5 text-xs font-medium text-blue-400 bg-blue-200/20 rounded hover:bg-blue-500 focus:outline-none hover:text-white"
-						onClick={onEditClick}
 					>
 						Edit
 					</Link>
-					<button className="px-3 py-1.5 text-xs font-medium text-red-400 bg-red-200/20 rounded hover:bg-red-500 focus:outline-none hover:text-white">
+					<button
+						className="px-3 py-1.5 text-xs font-medium text-red-400 bg-red-200/20 rounded hover:bg-red-500 focus:outline-none hover:text-white"
+						onClick={onDeleteClick}
+					>
 						Delete
 					</button>
 				</div>

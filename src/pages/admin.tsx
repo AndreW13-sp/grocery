@@ -1,30 +1,27 @@
 import { useState } from "react";
 
-import EditProductModal from "../components/modals/EditProductModal";
+import DeleteProductModal from "../components/modals/DeleteProductModal";
 import ProductTable from "../components/table/ProductTable";
-import { products } from "../constants/data";
+import { TProduct } from "../constants/data";
 import AdminLayout from "../layouts/AdminLayout";
+import useStore from "../store/product";
 
 function Admin() {
 	const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-	const [currentProduct, setCurrentProduct] = useState(null);
+	const [currentProduct, setCurrentProduct] = useState<TProduct | null>(null);
+	const products = useStore((state) => state.products);
 
-	const handleEditClick = (product) => {
+	const handleDeleteClick = (product: TProduct) => {
 		setCurrentProduct(product);
 		setIsEditModalOpen(true);
 	};
 
-	const handleCloseModal = () => {
-		setIsEditModalOpen(false);
-		setCurrentProduct(null);
-	};
-
 	return (
 		<AdminLayout>
-			<ProductTable products={products} onEditClick={handleEditClick} />
-			<EditProductModal
+			<ProductTable products={products} onDeleteClick={handleDeleteClick} />
+			<DeleteProductModal
 				isOpen={isEditModalOpen}
-				onClose={handleCloseModal}
+				setModalOpen={setIsEditModalOpen}
 				product={currentProduct}
 			/>
 		</AdminLayout>

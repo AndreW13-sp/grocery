@@ -56,26 +56,23 @@ function Sidebar({
 	return (
 		<aside
 			className={`absolute top-0 left-0 flex flex-col h-screen overflow-y-hidden duration-300 ease-linear -translate-x-full bg-slate-800 lg:static lg:translate-x-0 shrink-0 lg:min-w-[250px] ${
-				isOpen ? "translate-x-0 z-20" : "-translate-x-full"
+				isOpen ? "translate-x-0 z-[100]" : "-translate-x-full"
 			}`}
 		>
 			{/* Sidebar Header */}
-			<div className="flex items-center justify-between gap-6 px-6 py-5 border-b lg:py-6 border-slate-700">
-				<Link to="/" className="inline-flex items-center gap-2 text-white">
+			<div className="flex items-center justify-between gap-8 px-6 py-5 border-b lg:py-6 border-slate-700">
+				<Link to="/" className="inline-flex items-center gap-3 text-white">
 					<img
 						src="https://th.bing.com/th/id/OIG3.GXgDPVptnOnDH47OeZJT?w=1024&h=1024&rs=1&pid=ImgDetMain"
 						alt="logo"
-						className="object-contain w-5 h-5 rounded md:w-10 md:h-10"
+						className="object-contain w-5 h-5 rounded md:w-8 md:h-8"
 					/>
-					<span className="text-base md:text-xl">Grocery</span>
+					<span className="text-base font-semibold md:text-xl">Grocery.in</span>
 				</Link>
-				<button
-					className="block text-white lg:hidden"
-					onClick={() => toggleSidebar(false)}
-				>
+				<button className="block text-white lg:hidden" onClick={() => toggleSidebar(false)}>
 					<svg
 						className="fill-current"
-						width="20"
+						width="15"
 						height="18"
 						viewBox="0 0 20 18"
 						fill="none"
@@ -90,10 +87,8 @@ function Sidebar({
 			</div>
 
 			{/* Links */}
-			<div className="flex flex-col p-4 overflow-y-auto">
-				<h3 className="text-lg tracking-wider text-white uppercase font-poppins">
-					Menu
-				</h3>
+			<div className="flex flex-col px-2 py-4 overflow-y-auto sm:p-4">
+				<h3 className="ml-2 tracking-wider uppercase text-slate-400 font-poppins">Menu</h3>
 
 				<ul className="mt-3 space-y-1">
 					{links.map((link) => (
@@ -102,9 +97,7 @@ function Sidebar({
 								to={link.href}
 								onClick={(e) => {
 									e.preventDefault();
-									setActive((prevLink) =>
-										prevLink === link.text ? "" : link.text
-									);
+									setActive((prevLink) => (prevLink === link.text ? "" : link.text));
 								}}
 							>
 								<div
@@ -113,9 +106,7 @@ function Sidebar({
 									}`}
 								>
 									{link.icon}
-									<span className="flex-grow text-sm">
-										{link.text}
-									</span>
+									<span className="flex-grow text-sm">{link.text}</span>
 									<svg
 										className={`fill-current transition ${
 											active === link.text ? "rotate-180" : ""
@@ -137,11 +128,7 @@ function Sidebar({
 							</Link>
 
 							{link?.childLinks && (
-								<div
-									className={`mt-3 ml-6 ${
-										active === link.text ? "block" : "hidden"
-									}`}
-								>
+								<div className={`mt-3 ml-6 ${active === link.text ? "block" : "hidden"}`}>
 									<ul className="space-y-2 text-sm font-poppins text-slate-400">
 										{link.childLinks.map((child) => (
 											<li className="cursor-pointer hover:text-white">
